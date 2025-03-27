@@ -1,1 +1,19 @@
 @import "tailwindcss";
+
+:root {
+  --main-font: "Inknut Antiqua";
+  --sec-font: "Source Serif 4";
+  --main-light: #d9d9d9;
+  --sec-light: #808080;
+  --mid-light: #c9c9c9;
+  --main-dark: #808080;
+  --sec-dark: #d9d9d9;
+}
+
+body {
+  background-color: #d9d9d9;
+}
+
+.logo {
+  writing-mode: tb-rl;
+}

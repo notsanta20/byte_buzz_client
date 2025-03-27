@@ -1,13 +1,14 @@
-import { useState } from "react";
-import "./App.css";
+import { Routes, Route } from "react-router";
+import Main from "./components/main";
+import Card from "./components/card";
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
-    <>
-      <div>Hello World!!!</div>
-    </>
+    <Routes>
+      <Route path="/" element={<Main />}>
+        <Route index element={<Card />} />
+      </Route>
+    </Routes>
   );
 }
 
