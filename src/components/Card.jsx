@@ -7,13 +7,20 @@ function Card() {
     axios
       .get(`http://localhost:3000/`)
       .then((res) => {
-        setData(res.data);
+        setData(res.data.posts);
+        console.log(res.data.posts);
       })
       .catch((err) => {
         console.log(err);
       });
   }, []);
-  return <div>Testing</div>;
+  if (data.length > 0) {
+    data.forEach((post) => {
+      return <div>{post.title}</div>;
+    });
+  } else {
+    return <h2>Loading</h2>;
+  }
 }
 
 export default Card;

@@ -1,18 +1,28 @@
-function Header({ time }) {
+import HeaderButtons from "./HeaderButton";
+
+function Header({ data, url }) {
+  const time = data.time;
+  let title;
+  if (url === `/`) {
+    title = `Latest Articles`;
+  } else if (url === `/login`) {
+    title = `Log In`;
+  } else if (url === `/signup`) {
+    title = `Sign Up`;
+  }
   return (
     <header className="flex justify-between items-center p-5 font-(family-name:--sec-font) border-y-2 border-(--sec-light)">
       <div className="time">
-        <div className="text-center text-2xl font-bold">{time.day}</div>
-        <div>{time.date}</div>
+        <div className="text-center text-2xl font-bold">
+          {typeof time === `undefined` ? `Loading` : time.day}
+        </div>
+        <div>{typeof time === `undefined` ? `Loading` : time.date}</div>
       </div>
       <div className="title font-(family-name:--main-font) text-3xl">
-        Latest Articles
+        {title}
       </div>
       <div className="flex gap-3 items-center">
-        <div className="text-(--sec-light)">Log In</div>
-        <div className="bg-(--mid-light) font-semibold border-2 border-(--sec-light) py-2 px-5">
-          Sign Up
-        </div>
+        <HeaderButtons auth={data.auth} />
       </div>
     </header>
   );
