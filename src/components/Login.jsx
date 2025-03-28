@@ -1,77 +1,58 @@
 import { Link } from "react-router";
-import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import axios from "axios";
+
+const schema = z.object({
+  username: z
+    .string({
+      required_error: "username is required",
+    })
+    .min(3, {
+      message: "Username must be 3 or more characters long",
+    }),
+  password: z
+    .string({
+      required_error: "username is required",
+    })
+    .min(5, { message: "Password must be 8 or more characters long" }),
+});
 
 function Login() {
-  const [userData, setUserDate] = useState({
-    username: ``,
-    password: ``,
+  const {
+    register,
+    handleSubmit,
+    setError,
+    formState: { errors, isSubmitting },
+  } = useForm({
+    resolver: zodResolver(schema),
   });
-  const [errorMessage, setErrorMessage] = useState({
-    username: ` `,
-    password: ` `,
-  });
-  const [disabled, setDisabled] = useState(true);
 
-  function handleUsernameChange(e) {
-    const value = e.target.value;
-    setUserDate({
-      ...userData,
-      username: value,
-    });
-    if (!value.trim()) {
-      setErrorMessage({
-        ...errorMessage,
-        username: `Username should not be empty`,
-      });
-      setDisabled(true);
-    } else if (value.trim().length < 4) {
-      setErrorMessage({
-        ...errorMessage,
-        username: `Username should be more than 3 characters`,
-      });
-      setDisabled(true);
-    } else {
-      setErrorMessage({
-        ...errorMessage,
-        username: ``,
-      });
-      setDisabled(false);
-    }
-  }
+  async function onSubmit(data) {
+    const Authorization = `Bearer token`;
 
-  function handlePasswordChange(e) {
-    const value = e.target.value;
-    setUserDate({
-      ...userData,
-      password: value,
-    });
-    if (!value.trim()) {
-      setErrorMessage({
-        ...errorMessage,
-        password: `Password should not be empty`,
-      });
-      setDisabled(true);
-    } else if (value.trim().length < 8) {
-      setErrorMessage({
-        ...errorMessage,
-        password: `Password should be at least 8 characters`,
-      });
-      setDisabled(true);
-    } else {
-      setErrorMessage({
-        ...errorMessage,
-        password: ``,
-      });
-      setDisabled(false);
+    try {
+      axios
+        .post(`http://localhost:3000/login`, data, {
+          headers: { Authorization },
+        })
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } catch (err) {
+      setError("username", { message: `Username already taken` });
     }
   }
 
   return (
     <div className="h-full flex justify-center items-center font-(family-name:--sec-font)">
       <form
-        action="http://localhost:3000/login"
-        method="post"
-        className="flex flex-col gap-5 w-[30%]"
+        className="flex flex-col gap-5 w-[40%] lg:w-[30%]"
+        onSubmit={handleSubmit(onSubmit)}
       >
         <div className="flex flex-col gap-2">
           <label htmlFor="username" className="font-semibold text-xl">
@@ -82,13 +63,17 @@ function Login() {
             name="username"
             id="username"
             className={`border-2  bg-(--mid-light) p-2 outline-none ${
-              errorMessage.username ? "border-(--red)" : "border-(--sec-light)"
+              typeof errors.username === "undefined"
+                ? "border-(--sec-light)"
+                : "border-(--red)"
             }`}
-            min="3"
-            value={userData.username}
-            onChange={handleUsernameChange}
+            {...register("username")}
           />
-          <div className="text-(--red) text-sm">{errorMessage.username}</div>
+          <div className="text-sm italic text-(--red) h-2">
+            {typeof errors.username === "undefined"
+              ? ``
+              : errors.username.message}
+          </div>
         </div>
         <div className="flex flex-col gap-2">
           <label htmlFor="password" className="font-semibold text-xl">
@@ -99,18 +84,23 @@ function Login() {
             name="password"
             id="password"
             className={`border-2  bg-(--mid-light) p-2 outline-none ${
-              errorMessage.password ? "border-(--red)" : "border-(--sec-light)"
+              typeof errors.password === "undefined"
+                ? "border-(--sec-light)"
+                : "border-(--red)"
             }`}
-            value={userData.password}
-            onChange={handlePasswordChange}
+            {...register("password")}
           />
-          <div className="text-(--red) text-sm">{errorMessage.password}</div>
+          <div className="text-sm italic text-(--red) h-2">
+            {typeof errors.password === "undefined"
+              ? ``
+              : errors.password.message}
+          </div>
         </div>
         <button
           className="p-2 border-2 border-(--sec-light) bg-(--mid-light) cursor-pointer"
-          disabled={disabled}
+          disabled={isSubmitting}
         >
-          Log In
+          {isSubmitting ? `Loading` : `Log In`}
         </button>
         <div className="text-center">
           Don't have an account ?{" "}

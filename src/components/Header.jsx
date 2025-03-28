@@ -2,6 +2,7 @@ import HeaderButtons from "./HeaderButton";
 
 function Header({ data, url }) {
   const time = data.time;
+
   let title;
   if (url === `/`) {
     title = `Latest Articles`;
@@ -10,6 +11,7 @@ function Header({ data, url }) {
   } else if (url === `/signup`) {
     title = `Sign Up`;
   }
+
   return (
     <header className="flex justify-between items-center p-5 font-(family-name:--sec-font) border-y-2 border-(--sec-light)">
       <div className="time">
