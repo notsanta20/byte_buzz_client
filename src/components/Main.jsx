@@ -6,10 +6,11 @@ import axios from "axios";
 function Main() {
   const [data, setData] = useState([]);
   const url = useLocation().pathname;
-
+  const token = localStorage.getItem("authToken");
+  const Authorization = `Bearer ${token}`;
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/`)
+      .get(`http://localhost:3000/`, { headers: { Authorization } })
       .then((res) => {
         setData(res.data);
       })

@@ -4,12 +4,12 @@ function Header({ data, url }) {
   const time = data.time;
 
   let title;
-  if (url === `/`) {
-    title = `Latest Articles`;
-  } else if (url === `/login`) {
+  if (url === `/login`) {
     title = `Log In`;
   } else if (url === `/signup`) {
     title = `Sign Up`;
+  } else {
+    title = `Latest Articles`;
   }
 
   return (

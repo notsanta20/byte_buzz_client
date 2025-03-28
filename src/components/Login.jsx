@@ -30,7 +30,9 @@ function Login() {
   });
 
   async function onSubmit(data) {
-    const Authorization = `Bearer token`;
+    const token = localStorage.getItem("authToken");
+
+    const Authorization = `Bearer ${token}`;
 
     try {
       axios
@@ -38,7 +40,7 @@ function Login() {
           headers: { Authorization },
         })
         .then((res) => {
-          console.log(res);
+          localStorage.setItem("authToken", res.data.token);
         })
         .catch((err) => {
           console.log(err);
