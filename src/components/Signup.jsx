@@ -39,25 +39,22 @@ function Signup() {
     resolver: zodResolver(schema),
   });
 
-  async function onSubmit(data) {
+  function onSubmit(data) {
     const token = localStorage.getItem("authToken");
-
     const Authorization = `Bearer ${token}`;
+    const header = {
+      headers: { Authorization },
+    };
 
-    // try {
-    //   axios
-    //     .post(`http://localhost:3000/signup`, data, {
-    //       headers: { Authorization },
-    //     })
-    //     .then((res) => {
-    //       console.log(res);
-    //     })
-    //     .catch((err) => {
-    //       console.log(err);
-    //     });
-    // } catch (err) {
-    //   setError("username", { message: `Username already taken` });
-    // }
+    axios
+      .post(`http://localhost:3000/signup`, data, header)
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => {
+        setError("username", { message: `Username already taken` });
+        console.log(err);
+      });
   }
 
   return (
@@ -130,10 +127,10 @@ function Signup() {
           </div>
         </div>
         <button
-          className="p-2 border-2 border-(--sec-light) bg-(--mid-light) cursor-pointer"
+          className="p-2 border-2 border-(--sec-light) bg-(--mid-light) cursor-pointer font-semibold"
           disabled={isSubmitting}
         >
-          {isSubmitting ? `Loading` : `Log In`}
+          {isSubmitting ? `Loading` : `Sign Up`}
         </button>
         <div className="text-center">
           Don't have an account ?{" "}

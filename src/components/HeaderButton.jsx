@@ -1,8 +1,17 @@
 import { Link } from "react-router";
 
-function HeaderButtons({ auth }) {
+function HeaderButton({ auth }) {
   if (auth) {
-    return <h2>Log Out</h2>;
+    return (
+      <div
+        className="text-(--sec-light) cursor-pointer"
+        onClick={() => {
+          localStorage.setItem("authToken", null);
+        }}
+      >
+        Log Out
+      </div>
+    );
   } else {
     return (
       <>
@@ -17,4 +26,4 @@ function HeaderButtons({ auth }) {
   }
 }
 
-export default HeaderButtons;
+export default HeaderButton;

@@ -1,4 +1,4 @@
-import HeaderButtons from "./HeaderButton";
+import HeaderButton from "./HeaderButton";
 
 function Header({ data, url }) {
   const time = data.time;
@@ -24,7 +24,7 @@ function Header({ data, url }) {
         {title}
       </div>
       <div className="flex gap-3 items-center">
-        <HeaderButtons auth={data.auth} />
+        <HeaderButton auth={data.auth} />
       </div>
     </header>
   );

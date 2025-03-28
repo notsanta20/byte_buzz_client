@@ -29,25 +29,22 @@ function Login() {
     resolver: zodResolver(schema),
   });
 
-  async function onSubmit(data) {
+  function onSubmit(data) {
     const token = localStorage.getItem("authToken");
 
     const Authorization = `Bearer ${token}`;
 
-    try {
-      axios
-        .post(`http://localhost:3000/login`, data, {
-          headers: { Authorization },
-        })
-        .then((res) => {
-          localStorage.setItem("authToken", res.data.token);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    } catch (err) {
-      setError("username", { message: `Username already taken` });
-    }
+    axios
+      .post(`http://localhost:3000/login`, data, {
+        headers: { Authorization },
+      })
+      .then((res) => {
+        localStorage.setItem("authToken", res.data.token);
+      })
+      .catch((err) => {
+        setError("username", { message: `Username already taken` });
+        console.log(err);
+      });
   }
 
   return (
@@ -99,7 +96,7 @@ function Login() {
           </div>
         </div>
         <button
-          className="p-2 border-2 border-(--sec-light) bg-(--mid-light) cursor-pointer"
+          className="p-2 border-2 border-(--sec-light) bg-(--mid-light) cursor-pointer font-semibold"
           disabled={isSubmitting}
         >
           {isSubmitting ? `Loading` : `Log In`}
