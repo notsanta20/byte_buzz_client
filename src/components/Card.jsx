@@ -28,18 +28,14 @@ function Card() {
       <div className="grid grid-cols-3 gap-5 py-10">
         {data.map((post) => (
           <div
-            className="flex flex-col justify-around p-2 border-2 border-(--sec-light) font-(family-name:--main-font) min-h-[300px] max-h-[400px] text-xs"
+            className="flex flex-col gap-5 p-2 border-2 border-(--sec-light) font-(family-name:--main-font) min-h-[300px] max-h-[400px] text-xs"
             key={post.id}
           >
-            <div className="w-[90%] h-[200px] overflow-hidden self-center">
-              <img
-                src="./assets/test.png"
-                alt="article image"
-                className="w-[500px] h-[auto]"
-              />
-            </div>
             <div>{formatDate(post.createdAt)}</div>
             <div className="text-xl">{post.title}</div>
+            <div className="font-(family-name:--sec-font) text-base line-clamp-4">
+              {post.article}
+            </div>
             <div className="flex items-center gap-1">
               <div>{post._count.comments}</div>
               <div className="flex-1">

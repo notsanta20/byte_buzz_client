@@ -47,30 +47,27 @@ function Post() {
           </Link>
           <div className="text-right font-semibold">
             <div>{formatDate(post.createdAt)}</div>
-            <div>by {post.authorId}</div>
+            <div>by {post.author.username}</div>
           </div>
         </div>
         <div className="font-(family-name:--main-font) text-5xl text-center">
           {post.title}
-        </div>
-        <div className="self-center">
-          <img
-            src="/assets/test.png"
-            alt="image placeholder"
-            className="w-auto h-[300px]"
-          />
         </div>
         <p className="px-40 text-lg text-justify">{post.article}</p>
         <div className="flex flex-col gap-2">
           <h2 className="text-2xl font-semibold">
             {post.comments.length} Comments
           </h2>
-          {auth && <PostComment postId={post.id} />}
+          {auth ? (
+            <PostComment postId={post.id} />
+          ) : (
+            <h3 className="font-semibold underline">login to post comments</h3>
+          )}
           <ul className="flex flex-col gap-3">
             {post.comments.map((comment) => (
               <li className="text-lg flex flex-col gap-1" key={comment.id}>
                 <div className="font-medium">
-                  {comment.usersId} at {formatDate(comment.createdAt)}
+                  {comment.Users.username} at {formatDate(comment.createdAt)}
                 </div>
                 <div className="text-md">{comment.comment}</div>
               </li>
