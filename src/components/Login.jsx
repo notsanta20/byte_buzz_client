@@ -29,15 +29,15 @@ function Login() {
     resolver: zodResolver(schema),
   });
 
-  function onSubmit(data) {
+  async function onSubmit(data) {
     const token = localStorage.getItem("authToken");
-
     const Authorization = `Bearer ${token}`;
+    const header = {
+      headers: { Authorization },
+    };
 
     axios
-      .post(`http://localhost:3000/login`, data, {
-        headers: { Authorization },
-      })
+      .post(`http://localhost:3000/login`, data, header)
       .then((res) => {
         localStorage.setItem("authToken", res.data.token);
       })

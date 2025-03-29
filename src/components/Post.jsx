@@ -23,8 +23,6 @@ function Post() {
       });
   }, []);
 
-  console.log(post);
-
   function formatDate(date) {
     return format(date, `do MMM yyyy`);
   }
@@ -43,11 +41,11 @@ function Post() {
           <img src="./assets/test.png" alt="image placeholder" />
         </div>
         <p className="px-40 text-lg">{post.article}</p>
-        <div>
+        <div className="flex flex-col gap-2">
           <h2 className="text-2xl font-semibold">
             {post.comments.length} Comments
           </h2>
-          {auth && <PostComment />}
+          {auth && <PostComment postId={post.id} />}
           <ul>
             {post.comments.map((comment) => (
               <li className="text-lg flex flex-col gap-1" key={comment.id}>
