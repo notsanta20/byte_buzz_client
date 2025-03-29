@@ -7,6 +7,7 @@ function HeaderButton({ auth }) {
         className="text-(--sec-light) cursor-pointer"
         onClick={() => {
           localStorage.setItem("authToken", null);
+          window.location.reload();
         }}
       >
         Log Out

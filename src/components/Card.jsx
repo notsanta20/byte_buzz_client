@@ -25,7 +25,7 @@ function Card() {
 
   if (data.length > 0) {
     return (
-      <div className="grid grid-cols-3 gap-5 py-4">
+      <div className="grid grid-cols-3 gap-5 py-10">
         {data.map((post) => (
           <div
             className="flex flex-col justify-around p-2 border-2 border-(--sec-light) font-(family-name:--main-font) min-h-[300px] max-h-[400px] text-xs"

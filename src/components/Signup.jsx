@@ -1,4 +1,4 @@
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -30,6 +30,7 @@ const schema = z
   });
 
 function Signup() {
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -50,6 +51,7 @@ function Signup() {
       .post(`http://localhost:3000/signup`, data, header)
       .then((res) => {
         console.log(res.data);
+        navigate("/login", { replace: true });
       })
       .catch((err) => {
         const message = err.response.data.error;

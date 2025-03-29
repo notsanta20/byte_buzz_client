@@ -1,4 +1,4 @@
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -20,6 +20,7 @@ const schema = z.object({
 });
 
 function Login() {
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -40,6 +41,7 @@ function Login() {
       .post(`http://localhost:3000/login`, data, header)
       .then((res) => {
         localStorage.setItem("authToken", res.data.token);
+        navigate("/", { replace: true });
       })
       .catch((err) => {
         const message = err.response.data.message;
