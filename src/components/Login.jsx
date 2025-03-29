@@ -16,7 +16,7 @@ const schema = z.object({
     .string({
       required_error: "username is required",
     })
-    .min(5, { message: "Password must be 8 or more characters long" }),
+    .min(8, { message: "Password must be 8 or more characters long" }),
 });
 
 function Login() {
@@ -42,13 +42,18 @@ function Login() {
         localStorage.setItem("authToken", res.data.token);
       })
       .catch((err) => {
-        setError("username", { message: `Username already taken` });
-        console.log(err);
+        const message = err.response.data.message;
+        if (message === `Username does not exists`) {
+          setError("username", { message: `Username does not exists` });
+          setError("password", { message: ` ` });
+        } else if (message === `invalid Password`) {
+          setError("password", { message: `Password is not matching` });
+        }
       });
   }
 
   return (
-    <div className="h-full flex justify-center items-center font-(family-name:--sec-font)">
+    <div className="h-full py-5 flex justify-center items-center font-(family-name:--sec-font)">
       <form
         className="flex flex-col gap-5 w-[40%] lg:w-[30%]"
         onSubmit={handleSubmit(onSubmit)}

@@ -28,23 +28,35 @@ function Card() {
       <div className="grid grid-cols-3 gap-5 py-4">
         {data.map((post) => (
           <div
-            className="flex flex-col justify-around p-2 border-2 border-(--sec-light) font-(family-name:--sec-font) max-h-[400px]"
+            className="flex flex-col justify-around p-2 border-2 border-(--sec-light) font-(family-name:--main-font) min-h-[300px] max-h-[400px] text-xs"
             key={post.id}
           >
-            <div className="w-[200px] h-[200px] overflow-hidden self-center">
+            <div className="w-[90%] h-[200px] overflow-hidden self-center">
               <img
                 src="./assets/test.png"
                 alt="article image"
-                className="w-[1500px] h-[1500px]"
+                className="w-[500px] h-[auto]"
               />
             </div>
             <div>{formatDate(post.createdAt)}</div>
-            <div className="text-center text-2xl">{post.title}</div>
-            <div className="flex">
-              <div className="flex-1">{post._count.comments}</div>
-              <div>
-                <Link to={`/post/${post.id}`}>Read more</Link>
+            <div className="text-xl">{post.title}</div>
+            <div className="flex items-center gap-1">
+              <div>{post._count.comments}</div>
+              <div className="flex-1">
+                <img
+                  src="./assets/message-text.svg"
+                  alt="comments icon"
+                  className="w-[20px]"
+                />
               </div>
+              <Link to={`/post/${post.id}`} className="flex gap-1">
+                Read more
+                <img
+                  src="./assets/arrow-right.svg"
+                  alt="read more"
+                  className="w-[20px]"
+                />
+              </Link>
             </div>
           </div>
         ))}

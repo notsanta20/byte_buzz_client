@@ -52,13 +52,17 @@ function Signup() {
         console.log(res.data);
       })
       .catch((err) => {
-        setError("username", { message: `Username already taken` });
-        console.log(err);
+        const message = err.response.data.error;
+        if (message === `Username already exists`) {
+          setError("username", { message: `Username already exists` });
+        } else {
+          setError("root", { message: `Internal server error, try again` });
+        }
       });
   }
 
   return (
-    <div className="h-full flex justify-center items-center font-(family-name:--sec-font)">
+    <div className="h-full py-5 flex justify-center items-center font-(family-name:--sec-font)">
       <form
         className="flex flex-col gap-5 w-[40%] lg:w-[30%]"
         onSubmit={handleSubmit(onSubmit)}
@@ -124,6 +128,9 @@ function Signup() {
             {typeof errors.confirmPass === "undefined"
               ? ``
               : errors.confirmPass.message}
+          </div>
+          <div className="text-sm italic text-(--red) h-2">
+            {typeof errors.root === "undefined" ? `` : errors.root.message}
           </div>
         </div>
         <button
