@@ -3,7 +3,8 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router";
 import { format } from "date-fns";
 import PostComment from "./PostComment";
-import { Link } from "react-router";
+import { Link, useOutletContext } from "react-router";
+import Markdown from "react-markdown";
 
 function Post() {
   const [post, setPost] = useState(``);
@@ -15,6 +16,7 @@ function Post() {
   const header = {
     headers: { Authorization },
   };
+  const outlet = useOutletContext();
 
   useEffect(() => {
     axios
@@ -27,7 +29,7 @@ function Post() {
         console.log(`Error AXIOS`);
         console.log(err);
       });
-  }, []);
+  }, [outlet]);
 
   function formatDate(date) {
     return format(date, `do MMM yyyy`);
@@ -53,7 +55,9 @@ function Post() {
         <div className="font-(family-name:--main-font) text-5xl text-center">
           {post.title}
         </div>
-        <p className="px-40 text-lg text-justify">{post.article}</p>
+        <p className="px-40 text-lg text-justify">
+          <Markdown>{post.article}</Markdown>
+        </p>
         <div className="flex flex-col gap-2">
           <h2 className="text-2xl font-semibold">
             {post.comments.length} Comments

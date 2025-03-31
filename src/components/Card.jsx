@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { format } from "date-fns";
 import { Link } from "react-router";
+import Markdown from "react-markdown";
 
 function Card() {
   const [data, setData] = useState([]);
@@ -28,13 +29,13 @@ function Card() {
       <div className="grid grid-cols-3 gap-5 py-10">
         {data.map((post) => (
           <div
-            className="flex flex-col gap-5 p-2 border-2 border-(--sec-light) font-(family-name:--main-font) min-h-[300px] max-h-[400px] text-xs"
+            className="flex flex-col justify-around p-2 border-2 border-(--sec-light) font-(family-name:--main-font) text-xs"
             key={post.id}
           >
             <div>{formatDate(post.createdAt)}</div>
-            <div className="text-xl">{post.title}</div>
+            <div className="text-xl line-clamp-2">{post.title}</div>
             <div className="font-(family-name:--sec-font) text-base line-clamp-4">
-              {post.article}
+              <Markdown>{post.article}</Markdown>
             </div>
             <div className="flex items-center gap-1">
               <div>{post._count.comments}</div>

@@ -1,13 +1,14 @@
 import { Link } from "react-router";
 
-function HeaderButton({ auth }) {
+function HeaderButton({ auth, setAuth }) {
   if (auth) {
     return (
       <div
         className="text-(--sec-light) cursor-pointer"
         onClick={() => {
           localStorage.setItem("authToken", null);
-          window.location.reload();
+          const num = Math.floor(Math.random() * 100);
+          setAuth(num);
         }}
       >
         Log Out

@@ -5,6 +5,7 @@ import axios from "axios";
 
 function Home() {
   const [data, setData] = useState([]);
+  const [auth, setAuth] = useState(1);
   const url = useLocation().pathname;
   const token = localStorage.getItem("authToken");
   const Authorization = `Bearer ${token}`;
@@ -21,7 +22,7 @@ function Home() {
       .catch((err) => {
         console.log(err);
       });
-  }, [url]);
+  }, [url, auth]);
 
   return (
     <div className="grid grid-cols-[140px_1fr] py-5 h-screen">
@@ -29,8 +30,8 @@ function Home() {
         <Link to={`/`}>Buzz Bytes</Link>
       </div>
       <div className="grid grid-rows-[80px_1fr] p-15">
-        <Header data={data} url={url} />
-        <Outlet />
+        <Header data={data} url={url} setAuth={setAuth} />
+        <Outlet context={auth} />
       </div>
     </div>
   );
