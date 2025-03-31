@@ -16,7 +16,7 @@ function Post() {
   const header = {
     headers: { Authorization },
   };
-  const outlet = useOutletContext();
+  const [refresh, setRefresh] = useOutletContext();
 
   useEffect(() => {
     axios
@@ -29,7 +29,7 @@ function Post() {
         console.log(`Error AXIOS`);
         console.log(err);
       });
-  }, [outlet]);
+  }, [refresh]);
 
   function formatDate(date) {
     return format(date, `do MMM yyyy`);
@@ -55,15 +55,15 @@ function Post() {
         <div className="font-(family-name:--main-font) text-5xl text-center">
           {post.title}
         </div>
-        <p className="px-40 text-lg text-justify">
+        <div className="px-40">
           <Markdown>{post.article}</Markdown>
-        </p>
+        </div>
         <div className="flex flex-col gap-2">
           <h2 className="text-2xl font-semibold">
             {post.comments.length} Comments
           </h2>
           {auth ? (
-            <PostComment postId={post.id} />
+            <PostComment postId={post.id} setRefresh={setRefresh} />
           ) : (
             <h3 className="font-semibold underline">login to post comments</h3>
           )}

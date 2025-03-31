@@ -9,11 +9,12 @@ const schema = z.object({
   }),
 });
 
-function PostComment({ postId }) {
+function PostComment({ postId, setRefresh }) {
   const {
     register,
     handleSubmit,
     setError,
+    reset,
     formState: { errors, isSubmitting },
   } = useForm({
     resolver: zodResolver(schema),
@@ -29,7 +30,9 @@ function PostComment({ postId }) {
     axios
       .post(`http://localhost:3000/comment/${postId}`, data, header)
       .then((res) => {
-        console.log(res);
+        const num = Math.floor(Math.random() * 100);
+        reset();
+        setRefresh(num);
       })
       .catch((err) => {
         if (err.status === 401) {
@@ -52,7 +55,7 @@ function PostComment({ postId }) {
       <div className="text-sm italic text-(--red) h-2">
         {typeof errors.comment === `undefined` ? `` : errors.comment.message}
       </div>
-      <button className="border-2 border(--sec-light) p-2 self-center">
+      <button className="border-2 border(--sec-light) p-2 self-center cursor-pointer">
         {isSubmitting ? "posting comment" : "Post Comment"}
       </button>
     </form>
