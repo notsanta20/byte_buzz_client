@@ -4,7 +4,7 @@ function HeaderButton({ auth, setAuth }) {
   if (auth) {
     return (
       <div
-        className="text-(--sec-light) cursor-pointer"
+        className="cursor-pointer"
         onClick={() => {
           localStorage.setItem("authToken", null);
           const num = Math.floor(Math.random() * 100);
@@ -20,7 +20,7 @@ function HeaderButton({ auth, setAuth }) {
         <div className="text-(--sec-light)">
           <Link to={`/login`}>Log In</Link>
         </div>
-        <div className="bg-(--mid-light) font-semibold border-2 border-(--sec-light) py-2 px-5">
+        <div className="bg-(--mid-light) dark:bg-(--mid-dark) font-semibold border-2 border-(--sec-light) py-2 px-5">
           <Link to={`/signup`}>Sign Up</Link>
         </div>
       </>

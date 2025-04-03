@@ -1,8 +1,8 @@
 import HeaderButton from "./HeaderButton";
 
-function Header({ data, url, setAuth }) {
+function Header({ data, url, setAuth, darkTheme, setDarkTheme }) {
   const time = data.time;
-
+  const html = document.querySelector(`html`);
   let title;
   if (url === `/login`) {
     title = `Log In`;
@@ -10,6 +10,16 @@ function Header({ data, url, setAuth }) {
     title = `Sign Up`;
   } else {
     title = `Latest Articles`;
+  }
+
+  function handleTheme() {
+    if (darkTheme) {
+      html.classList.remove(`dark`);
+      setDarkTheme(false);
+    } else {
+      html.classList.add(`dark`);
+      setDarkTheme(true);
+    }
   }
 
   return (
@@ -24,6 +34,14 @@ function Header({ data, url, setAuth }) {
         {title}
       </div>
       <div className="flex gap-3 items-center">
+        <img
+          src={darkTheme ? "/assets/half-moon.svg" : "/assets/sun-light.svg"}
+          alt="theme icon"
+          className="w-[18px] cursor-pointer"
+          onClick={() => {
+            handleTheme();
+          }}
+        />
         <HeaderButton auth={data.auth} setAuth={setAuth} />
       </div>
     </header>

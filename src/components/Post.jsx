@@ -8,6 +8,7 @@ import { Link, useOutletContext } from "react-router";
 function Post() {
   const [post, setPost] = useState(``);
   const [auth, setAuth] = useState(false);
+  const [refresh, setRefresh, darkTheme] = useOutletContext();
   const params = useParams();
   const postId = params.postId;
   const token = localStorage.getItem("authToken");
@@ -15,7 +16,6 @@ function Post() {
   const header = {
     headers: { Authorization },
   };
-  const [refresh, setRefresh] = useOutletContext();
 
   useEffect(() => {
     axios
@@ -40,7 +40,11 @@ function Post() {
         <div className="flex">
           <Link to="/" className="flex-1 flex items-center gap-2">
             <img
-              src="/assets/arrow-left.svg"
+              src={
+                darkTheme
+                  ? "/assets/arrow-left-dark.svg"
+                  : "/assets/arrow-left-light.svg"
+              }
               alt="back to index"
               className="w-[20px] h-auto"
             />
@@ -54,7 +58,7 @@ function Post() {
         <div className="font-(family-name:--main-font) text-5xl text-center">
           {post.title}
         </div>
-        <div className="px-40 prose !max-w-none">
+        <div className="px-40 prose dark:prose-invert !max-w-none">
           <div dangerouslySetInnerHTML={{ __html: post.article }} />
         </div>
         <div className="flex flex-col gap-2">
@@ -68,7 +72,10 @@ function Post() {
           )}
           <ul className="flex flex-col gap-3">
             {post.comments.map((comment) => (
-              <li className="text-lg flex flex-col gap-1" key={comment.id}>
+              <li
+                className="text-lg flex flex-col py-3 border-b-1 border-(--sec-light)"
+                key={comment.id}
+              >
                 <div className="font-medium">
                   {comment.Users.username} at {formatDate(comment.createdAt)}
                 </div>

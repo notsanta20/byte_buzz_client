@@ -6,6 +6,8 @@ import axios from "axios";
 function Home() {
   const [data, setData] = useState([]);
   const [refresh, setRefresh] = useState(1);
+  const [darkTheme, setDarkTheme] = useState(false);
+
   const url = useLocation().pathname;
   const token = localStorage.getItem("authToken");
   const Authorization = `Bearer ${token}`;
@@ -30,8 +32,14 @@ function Home() {
         <Link to={`/`}>Byte Buzz</Link>
       </div>
       <div className="grid grid-rows-[80px_1fr] p-15">
-        <Header data={data} url={url} setAuth={setRefresh} />
-        <Outlet context={[refresh, setRefresh]} />
+        <Header
+          data={data}
+          url={url}
+          setAuth={setRefresh}
+          darkTheme={darkTheme}
+          setDarkTheme={setDarkTheme}
+        />
+        <Outlet context={[refresh, setRefresh, darkTheme]} />
       </div>
     </div>
   );

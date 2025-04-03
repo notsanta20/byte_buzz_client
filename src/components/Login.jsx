@@ -68,7 +68,7 @@ function Login() {
             type="text"
             name="username"
             id="username"
-            className={`border-2  bg-(--mid-light) p-2 outline-none ${
+            className={`border-2  bg-(--mid-light) dark:bg-(--mid-dark) p-2 outline-none ${
               typeof errors.username === "undefined"
                 ? "border-(--sec-light)"
                 : "border-(--red)"
@@ -89,7 +89,7 @@ function Login() {
             type="password"
             name="password"
             id="password"
-            className={`border-2  bg-(--mid-light) p-2 outline-none ${
+            className={`border-2  bg-(--mid-light) dark:bg-(--mid-dark) p-2 outline-none ${
               typeof errors.password === "undefined"
                 ? "border-(--sec-light)"
                 : "border-(--red)"
@@ -103,7 +103,7 @@ function Login() {
           </div>
         </div>
         <button
-          className="p-2 border-2 border-(--sec-light) bg-(--mid-light) cursor-pointer font-semibold"
+          className="p-2 border-2 border-(--sec-light) bg-(--mid-light) dark:bg-(--mid-dark) cursor-pointer font-semibold"
           disabled={isSubmitting}
         >
           {isSubmitting ? `Loading` : `Log In`}

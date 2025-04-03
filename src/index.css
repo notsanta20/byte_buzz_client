@@ -1,20 +1,29 @@
 @import "tailwindcss";
 @plugin '@tailwindcss/typography';
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
   --main-font: "Inknut Antiqua";
   --sec-font: "Source Serif 4";
   --main-light: #d9d9d9;
   --sec-light: #808080;
   --mid-light: #c9c9c9;
-  --main-dark: #808080;
+  --mid-dark: #4e4e4e;
+  --main-dark: #2a2a2a;
   --sec-dark: #d9d9d9;
-  --red: #7d0000;
+  --red: #ac0000;
   --green: #0a7d00;
 }
 
-body {
-  background-color: #d9d9d9;
+html {
+  background-color: var(--main-light);
+  color: black;
+}
+
+html.dark {
+  background-color: var(--main-dark);
+  color: white;
 }
 
 .logo {

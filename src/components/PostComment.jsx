@@ -49,13 +49,13 @@ function PostComment({ postId, setRefresh }) {
         type="text"
         name="comment"
         id="comment"
-        className="border-2 border-(--sec-light) outline-none p-2 flex-1"
+        className="border-2 border-(--sec-light) bg-(--mid-light) dark:bg-(--mid-dark) outline-none p-2 flex-1"
         {...register("comment")}
       />
       <div className="text-sm italic text-(--red) h-2">
         {typeof errors.comment === `undefined` ? `` : errors.comment.message}
       </div>
-      <button className="border-2 border(--sec-light) p-2 self-center cursor-pointer">
+      <button className="border-2 border-(--sec-light) p-2 self-center cursor-pointer">
         {isSubmitting ? "posting comment" : "Post Comment"}
       </button>
     </form>
