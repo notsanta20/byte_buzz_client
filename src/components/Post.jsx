@@ -4,7 +4,6 @@ import { useParams } from "react-router";
 import { format } from "date-fns";
 import PostComment from "./PostComment";
 import { Link, useOutletContext } from "react-router";
-import Markdown from "react-markdown";
 
 function Post() {
   const [post, setPost] = useState(``);
@@ -55,8 +54,8 @@ function Post() {
         <div className="font-(family-name:--main-font) text-5xl text-center">
           {post.title}
         </div>
-        <div className="px-40">
-          <Markdown>{post.article}</Markdown>
+        <div className="px-40 prose !max-w-none">
+          <div dangerouslySetInnerHTML={{ __html: post.article }} />
         </div>
         <div className="flex flex-col gap-2">
           <h2 className="text-2xl font-semibold">

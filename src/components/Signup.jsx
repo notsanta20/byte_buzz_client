@@ -15,12 +15,12 @@ const schema = z
       }),
     password: z
       .string({
-        required_error: "username is required",
+        required_error: "password is required",
       })
       .min(5, { message: "Password must be 8 or more characters long" }),
     confirmPass: z
       .string({
-        required_error: "username is required",
+        required_error: "password is required",
       })
       .min(5, { message: "Password must be 8 or more characters long" }),
   })

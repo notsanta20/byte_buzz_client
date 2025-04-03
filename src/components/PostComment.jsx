@@ -44,14 +44,14 @@ function PostComment({ postId, setRefresh }) {
   }
 
   return (
-    <form className="flex flex-col gap-2" onSubmit={handleSubmit(onSubmit)}>
-      <textarea
+    <form className="flex gap-2" onSubmit={handleSubmit(onSubmit)}>
+      <input
+        type="text"
         name="comment"
         id="comment"
-        rows={5}
-        className="border-2 border-(--sec-light) outline-none p-2"
+        className="border-2 border-(--sec-light) outline-none p-2 flex-1"
         {...register("comment")}
-      ></textarea>
+      />
       <div className="text-sm italic text-(--red) h-2">
         {typeof errors.comment === `undefined` ? `` : errors.comment.message}
       </div>
