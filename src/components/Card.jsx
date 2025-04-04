@@ -68,7 +68,11 @@ function Card() {
       </div>
     );
   } else {
-    return <h2>Loading</h2>;
+    return (
+      <h2 className="flex justify-center items-center text-2xl">
+        Loading . . .
+      </h2>
+    );
   }
 }
 
