@@ -16,10 +16,11 @@ function Post() {
   const header = {
     headers: { Authorization },
   };
+  const hostUrl = import.meta.env.VITE_SERVER_URL;
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/post/${postId}`, header)
+      .get(`${hostUrl}/post/${postId}`, header)
       .then((res) => {
         setPost(res.data.post);
         setAuth(res.data.auth);

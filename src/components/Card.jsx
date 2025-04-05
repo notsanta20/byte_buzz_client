@@ -6,11 +6,12 @@ import { Link, useOutletContext } from "react-router";
 function Card() {
   const [data, setData] = useState([]);
   const darkTheme = useOutletContext()[2];
+  const hostUrl = import.meta.env.VITE_SERVER_URL;
 
   //get posts from the server and set to DATA variable
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/`)
+      .get(hostUrl)
       .then((res) => {
         setData(res.data.posts);
       })

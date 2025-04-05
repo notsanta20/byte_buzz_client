@@ -36,9 +36,10 @@ function Login() {
     const header = {
       headers: { Authorization },
     };
+    const hostUrl = import.meta.env.VITE_SERVER_URL;
 
     axios
-      .post(`http://localhost:3000/login`, data, header)
+      .post(`${hostUrl}/login`, data, header)
       .then((res) => {
         localStorage.setItem("authToken", res.data.token);
         navigate("/", { replace: true });

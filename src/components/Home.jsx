@@ -14,10 +14,11 @@ function Home() {
   const header = {
     headers: { Authorization },
   };
+  const hostUrl = import.meta.env.VITE_SERVER_URL;
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/`, header)
+      .get(hostUrl, header)
       .then((res) => {
         setData(res.data);
       })

@@ -26,9 +26,10 @@ function PostComment({ postId, setRefresh }) {
     const header = {
       headers: { Authorization },
     };
+    const hostUrl = import.meta.env.VITE_SERVER_URL;
 
     axios
-      .post(`http://localhost:3000/comment/${postId}`, data, header)
+      .post(`${hostUrl}/comment/${postId}`, data, header)
       .then((res) => {
         const num = Math.floor(Math.random() * 100);
         reset();

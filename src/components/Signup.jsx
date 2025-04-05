@@ -46,9 +46,10 @@ function Signup() {
     const header = {
       headers: { Authorization },
     };
+    const hostUrl = import.meta.env.VITE_SERVER_URL;
 
     axios
-      .post(`http://localhost:3000/signup`, data, header)
+      .post(`${hostUrl}/signup`, data, header)
       .then((res) => {
         console.log(res.data);
         navigate("/login", { replace: true });
