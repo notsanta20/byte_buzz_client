@@ -3,7 +3,7 @@
   <p align="center">
     Byte Buzz Client is frontend for the blog app. You can View all the Posts and comments made by other Authors/Users. You can also Register and login to add comments on the posts. This is created using React and Javascript with RESTful APIs created in Express server and it uses JSON Web Token for Authentication, React Router, React-Hook_Form, Zod, Axios under the hood.
     <br />
-    <a href="" target="_blank">Live Demo</a>
+    <a href="https://byte-buzz-client.vercel.app/" target="_blank">Live Demo</a>
   </p>
 </div>
 <br>
